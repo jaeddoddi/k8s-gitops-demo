@@ -1,0 +1,12 @@
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-app-service # 서비스 이름
+spec:
+  selector:
+    app: sample-app # 이 레이블을 가진 Pod에 연결
+  ports:
+  - port: 80 # 서비스 포트
+    targetPort: 80 # 대상 포트
+  type: NodePort # NodePort 타입으로 설정하여 외부 접근 가능
