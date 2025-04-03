@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: sample-app
-        image: nginx:latest  # GitHub Actions에 의해 이 이미지가 교체됩니다
+        image: jaeddoddi/gitops-demo:9e5e7cd29b754da81e7a4a11b70e77fea22b6bd3
         ports:
         - containerPort: 80
