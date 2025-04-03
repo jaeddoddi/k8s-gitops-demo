@@ -35,7 +35,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Kubernetes manifests
-        run:
+        run: |
           # 새 이미지 태그로 deployment.yaml 파일 업데이트
           sed -i "s|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/gitops-demo:${{ github.sha }}|g" apps/sample-app/deployment.yaml
     
