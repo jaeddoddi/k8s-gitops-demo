@@ -28,7 +28,6 @@ jobs:
           context: ./src  # 빌드 컨텍스트
           push: true  # 이미지 푸시 활성화
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gitops-demo:${{ github.sha }}  # 이미지 태그 (커밋 SHA 사용)
-
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -36,14 +35,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Kubernetes manifests
-        run: |
+          run: |
           # 새 이미지 태그로 deployment.yaml 파일 업데이트
           sed -i "s|image: .*|image: ${{ secrets.DOCKERHUB_USERNAME }}/gitops-demo:${{ github.sha }}|g" apps/sample-app/deployment.yaml
-
+    
           # Git 설정
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'github-actions@github.com'
-
+    
           # 변경사항 커밋 및 푸시
           git add apps/sample-app/deployment.yaml
           git commit -m "Update image to ${{ github.sha }}" || echo "No changes to commit"
