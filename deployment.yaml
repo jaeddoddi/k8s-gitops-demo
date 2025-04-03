@@ -1,0 +1,22 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app # 애플리케이션 이름
+  labels:
+    app: sample-app # 애플리케이션 레이블
+spec:
+  replicas: 2 # 2개의 복제본 생성
+  selector:
+    matchLabels:
+      app: sample-app # 이 레이블을 가진 Pod 선택
+  template:
+    metadata:
+      labels:
+        app: sample-app # Pod에 적용되는 레이블
+    spec:
+      containers:
+      - name: sample-app # 컨테이너 이름
+        image: nginx:latest # nginx 이미지 사용
+        ports:
+        - containerPort: 80 # 컨테이너 포트 80 노출
